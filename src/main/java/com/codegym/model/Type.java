@@ -13,7 +13,6 @@ public class Type {
     private String name;
 
     public Type() {
-
     }
 
     public Type(Long id, String name) {

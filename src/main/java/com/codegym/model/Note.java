@@ -25,8 +25,8 @@ public class Note {
         this.type = type;
     }
 
-    public Note() {
 
+    public Note() {
     }
 
     public Note(Long id, String title, String content) {
