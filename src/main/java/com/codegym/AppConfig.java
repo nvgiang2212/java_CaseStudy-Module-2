@@ -1,5 +1,9 @@
 package com.codegym;
 
+import com.codegym.service.NoteService;
+import com.codegym.service.TypeService;
+import com.codegym.service.impl.NoteServiceImpl;
+import com.codegym.service.impl.TypeServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -39,6 +43,16 @@ import java.util.Properties;
 public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
+
+    @Bean
+    public NoteService noteService(){
+        return new NoteServiceImpl();
+    }
+
+    @Bean
+    public TypeService typeService() {
+        return new TypeServiceImpl();
+    }
 
 
     @Override

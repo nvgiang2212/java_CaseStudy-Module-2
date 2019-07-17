@@ -13,5 +13,4 @@ public interface TypeService {
     void save(Type type);
 
     void remove(Long id);
-
 }

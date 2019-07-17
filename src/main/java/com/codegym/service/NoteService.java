@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface NoteService {
 
+    Page<Note> findAllByTitleContainingOrContentContaining(String title, String content, Pageable pageable);
+
     Page<Note> findAll(Pageable pageable);
 
     Note findById(Long id);
@@ -13,5 +15,4 @@ public interface NoteService {
     void save(Note note);
 
     void remove(Long id);
-
 }

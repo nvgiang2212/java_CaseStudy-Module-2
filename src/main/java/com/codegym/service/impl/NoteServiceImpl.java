@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
+//
 public class NoteServiceImpl implements NoteService {
 
     @Autowired
@@ -32,4 +34,8 @@ public class NoteServiceImpl implements NoteService {
         noteRepository.delete(id);
     }
 
+    @Override
+    public Page<Note> findAllByTitleContainingOrContentContaining(String title,String content, Pageable pageable) {
+        return noteRepository.findAllByTitleContainingOrContentContaining(title, content, pageable);
+    }
 }
