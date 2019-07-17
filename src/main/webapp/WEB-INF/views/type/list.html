@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Types</title>
+</head>
+<style>
+
+    footer {
+        text-align: right;
+    }
+
+    #categories {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #categories td, #categories th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #categories tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #categories tr:hover {
+        background-color: #1ddd10;
+    }
+
+    #categories th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #0217af;
+        color: white;
+    }
+
+
+    button {
+        width: 150px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+
+    #note {
+        text-align: right;
+    }
+
+</style>
+<body>
+
+<span>
+    <a href="/create-type">
+        <button>Create new type</button>
+    </a>
+</span>
+
+<span>
+<a href="/notes">
+    <button>Note Manager</button>
+</a>
+</span>
+
+<h1>Types</h1>
+<table id="categories">
+    <tr>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="type : ${types}">
+        <tr>
+            <td th:text="${type.name}"></td>
+            <td><a th:href="@{/edit-type/__${type.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-type/__${type.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+<footer> &copy; 2019 Jason Nguyen</footer>
+
+</body>
+</html>
