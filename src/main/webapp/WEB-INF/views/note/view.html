@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View note</title>
+</head>
+<style>
+
+    h1 {
+        text-align: center;
+        overflow: hidden;
+        background: linear-gradient(90deg, #000, #ffb419, #000);
+        background-repeat: no-repeat;
+        background-size: 80%;
+        animation: animate 3s linear infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    }
+
+    @keyframes animate {
+        0% {
+            background-position: -500%;
+        }
+        100% {
+            background-position: 500%;
+        }
+    }
+
+    #block {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        text-align: center;
+        color: white;
+    }
+
+    h2 {
+        text-align: center;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+        color: white;
+    }
+
+    #form {
+        background-image:url("https://hanatemplate.com/images/parchment-png.png");
+        background-size: contain;
+        width: 68%;
+        height: 100%;
+        position: absolute;
+        left: 220px;
+    }
+
+    #content {
+        width: 55%;
+        position: absolute;
+        left: 190px;
+        top: 190px;
+        font-size: large;
+    }
+
+    @-webkit-keyframes glow {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+
+        to {
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+    }
+
+    button {
+        width: 150px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+
+</style>
+<div id="block">
+    <p>
+        <a href="/notes">
+            <button>Note list</button>
+        </a>
+</div>
+<body>
+
+<form id="form" th:action="@{/edit-note}" th:object="${note}" method="get">
+
+    <h1 th:text="${note.title}"></h1>
+    <br><br>
+    <p id="content" th:text="${note.content}"></p>
+</form>
+</body>
+</html>

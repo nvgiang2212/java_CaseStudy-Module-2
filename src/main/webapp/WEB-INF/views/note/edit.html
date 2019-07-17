@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit note</title>
+</head>
+<body>
+<style>
+
+    #message {
+        color: blue;
+        font-size: large;
+    }
+
+    #form {
+        width: 1200px;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    #content {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        width: 1000px;
+        border-radius: 5px;
+    }
+
+    button {
+        width: 150px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+
+    input[type=text] {
+        width: 100%;
+        padding: 12px 0;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    input[type=submit]:hover {
+        background-color: darkorange;
+    }
+
+</style>
+<h1>Edit note</h1>
+<p>
+    <a href="/notes">
+        <button>Note list</button>
+    </a>
+</p>
+<div id="message">
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</div>
+<div id="form">
+    <form th:action="@{/edit-note}" th:object="${note}" method="post">
+        <input th:type="hidden" th:value="note.id" th:field="*{id}">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text"  th:field="*{title}"/></td>
+            </tr>
+            <tr>
+                <td>Type :</td>
+                <td>
+                    <select th:field="*{type}">
+                        <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea id="content" rows="25"  th:field="*{content}"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+<footer> &copy; 2019 Jason Nguyen</footer>
+</html>

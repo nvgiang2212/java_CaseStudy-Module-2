@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xml:lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Note List</title>
+</head>
+<style>
+
+    #search {
+        text-align: right;
+    }
+
+    #search input {
+        border-radius: 10px;
+    }
+
+    footer {
+        text-align: right;
+    }
+
+    body {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        color: white;
+        background: #040a11;
+    }
+
+    #notes {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #notes tr {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    }
+
+    #notes td, #notes th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    /*#notes tr:nth-child(even) {*/
+    /*    background-color: #f2f2f2;*/
+    /*}*/
+
+    /*#notes tr:hover {*/
+    /*    background-color: #0d11ff;*/
+    /*}*/
+
+    #notes th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        /*background-color: #0217af;*/
+        color: white;
+    }
+
+    button {
+        width: 150px;
+        background-color: #0d11ff;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+
+
+</style>
+<body>
+
+<span>
+    <a href="/create-note">
+        <button>New note</button>
+    </a>
+</span>
+
+<span>
+<a href="/types">
+    <button>Type Manager</button>
+</a>
+</span>
+
+<h1>notes manager v1.0</h1>
+
+<div id="search">
+    <form>
+        <label for="s"></label><input id="s" name="s" type="text"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <br>
+</div>
+
+<table id="notes">
+    <tr>
+<!--        <th>Order number</th>-->
+        <th>Title</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+    <th:block th:each="note : ${notes}">
+        <tr>
+            <td th:text="${note.title}"></td>
+            <td th:text="${note.type.name}"></td>
+            <td style="text-align: center"><a th:href="@{/edit-note/__${note.id}__}">Edit</a>
+                <a th:href="@{/delete-note/__${note.id}__}">Delete</a>
+                <a th:href="@{/view-note/__${note.id}__}">View</a></td>
+        </tr>
+    </th:block>
+</table>
+<div>
+    <a th:href="@{'/'(page=${notes.number - 1})}" th:if="${notes.hasPrevious()}">Previous</a>
+    <span th:text="${notes.number + 1}"></span>/<span th:text="${notes.totalPages}"></span>
+    <a th:href="@{'/'(page=${notes.number + 1})}" th:if="${notes.hasNext()}">Next</a>
+</div>
+<footer> &copy; 2019 Jason Nguyen</footer>
+</body>
+</html>
